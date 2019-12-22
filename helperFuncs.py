@@ -1,4 +1,6 @@
-
+"""
+Set of helper functions for basic file I/O, data cleaning, and other misc tasks
+"""
 import pandas as pd
 
 
@@ -33,4 +35,21 @@ def removeTies(data):
     data = data[data['Win = 1'] < 2]
 
     return data
+
+
+def createFeatures(data):
+    """
+    Creates additional features on the dataset from the original set of variables
+    :param data: main dataset of csgo matches returned from importData
+    :return: data: dataset of csgo matches with additional features
+    """
+
+    data['kd_ratio'] = data['Kills'] / data['Deaths']   # add kill/death ratio column
+
+    # total number of rounds in match
+    strings = [x.split('-') for x in data['Scoreline']]
+    data['total_rounds'] = [(int(x[0]) + int(x[1])) for x in strings]
+
+    return data
+
 

@@ -1,4 +1,4 @@
-from helperFuncs import importData
+from helperFuncs import importData, removeTies, createFeatures
 
 
 if __name__ == "__main__":
@@ -8,3 +8,6 @@ if __name__ == "__main__":
 
     data = removeTies(data)
     print('Tie Matches Removed')
+
+    data = createFeatures(data)
+    print('Additional Features Created')
