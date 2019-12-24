@@ -37,6 +37,15 @@ def removeTies(data):
     return data
 
 
+def removeRandoms(data):
+    """
+    Remove matches where randoms are on the team, these matches will bias the results that should only apply to a
+    full five man stack
+    """
+
+    return data
+
+
 def createFeatures(data):
     """
     Creates additional features on the dataset from the original set of variables
@@ -49,6 +58,10 @@ def createFeatures(data):
     # total number of rounds in match
     strings = [x.split('-') for x in data['Scoreline']]
     data['total_rounds'] = [(int(x[0]) + int(x[1])) for x in strings]
+
+    # map starting side to numeric values
+    start_side = {'CT': 0, 'T': 1}
+    data['num_start'] = data['Starting Side'].map(start_side)
 
     return data
 
